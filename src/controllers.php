@@ -7,10 +7,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormError;
 
 $app->match('/', function() use ($app) {
-    $app['session']->setFlash('warning', 'Warning flash message');
-    $app['session']->setFlash('info', 'Info flash message');
-    $app['session']->setFlash('success', 'Success flash message');
-    $app['session']->setFlash('error', 'Error flash message');
+    $app['session']->getFlashBag()->add('warning', array(
+        'title'   => 'Warning Title',
+        'message' => 'Warning flash message.'
+    ));
+    $app['session']->getFlashBag()->add('info', array(
+        'title'   => 'Info Title',
+        'message' => 'Info flash mesage'
+    ));
+    $app['session']->getFlashBag()->add('success', array(
+        'title'   => 'Success Title',
+        'message' => 'Success flash mesage'
+    ));
+    $app['session']->getFlashBag()->add('error', array(
+        'title'   => 'Error Title',
+        'message' => 'Error flash mesage'
+    ));
 
     return $app['twig']->render('index.html.twig');
 })->bind('homepage');
